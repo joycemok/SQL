@@ -3,7 +3,7 @@ USE my_spotify_data;
 -- 1. Prepare and Clean Dataset --
 
 # merge two streaming history datasets
-CREATE TABLE stream_history AS
+CREATE TABLE IF NOT EXISTS stream_history AS
 (SELECT * FROM my_spotify_data.streaminghistory0
 UNION ALL 
 SELECT * FROM my_spotify_data.streaminghistory1);
@@ -39,25 +39,27 @@ GROUP BY artistName
 ORDER BY minPlayed DESC
 LIMIT 10;
 
-# 4. How many minutes did I listen to music each month?
+# 4. What are my top 3 songs from my top most listened to artists?
+
+# 5. How many minutes did I listen to music each month?
 SELECT MONTHNAME(playTime) AS months, SUM(msPlayed) / 60000 AS minPlayed
 FROM stream_history
 GROUP BY months
 ORDER BY minPlayed DESC;
 
-# 5. What are my listening habits for each hour of the day?
+# 6. What are my listening habits for each hour of the day?
 SELECT hour_played, SUM(msPlayed)/60000 AS minPlayed
 FROM stream_history
 GROUP BY hour_played
 ORDER BY hour_played ASC;
 
-# 6. What time of day did I listen to music the most?
+# 7. What time of day did I listen to music the most?
 SELECT hour_played, SUM(msPlayed)/60000 AS minPlayed
 FROM stream_history
 GROUP BY hour_played
 ORDER BY minPlayed DESC;
 
-# 7. Who are my top 5 artists each month and how many minutes did I listen to each artist?
+# 8. Who are my top 5 artists each month and how many minutes did I listen to each artist?
 WITH bymonth AS (
 	SELECT month_played, artistName, SUM(msPlayed)/60000 AS minPlayed
 	FROM stream_history
