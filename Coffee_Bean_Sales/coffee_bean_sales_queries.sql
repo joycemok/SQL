@@ -131,6 +131,7 @@ GROUP BY customers.Country, customers.City
 ORDER BY Sales DESC
 LIMIT 5;
 
+
 -- Sales Trends -- 
 
 -- Revenue By Year -- 
