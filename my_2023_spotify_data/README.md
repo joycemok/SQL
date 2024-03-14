@@ -1,4 +1,4 @@
-# My 2023 Spotify Data
+# 🎧 My 2023 Spotify Data
 ## Article
 View the article on [Medium](https://medium.com/@joycemok8/my-spotify-2023-listening-habits-466a812cb2df)
 
