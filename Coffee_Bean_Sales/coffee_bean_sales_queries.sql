@@ -30,7 +30,9 @@ SET `Coffee Type` = REPLACE(`Coffee Type`, 'Exc', 'Excelsa');
 
 
 -- SQL Queries --
+
 Use coffee_sales;
+
 
 -- Learning About Customers --
 
@@ -48,6 +50,7 @@ SELECT `Loyalty Card`, COUNT(`Loyalty Card`) AS Count
 FROM customers
 GROUP BY `Loyalty Card`;
 
+
 -- Learning About Products -- 
 
 -- Item with most and least profit --
@@ -61,6 +64,14 @@ From orders
 LEFT JOIN customers ON orders.`Customer ID` = customers.`Customer ID`
 LEFT JOIN products ON orders.`Product ID` = products.`Product ID`
 GROUP BY products.`Coffee Type`
+ORDER BY Revenue DESC;
+
+-- Type of Roast that Generate Most Revenue --
+SELECT products.`Roast Type`, ROUND(SUM(orders.Quantity * products.`Unit Price`), 2) AS Revenue
+From orders
+LEFT JOIN customers ON orders.`Customer ID` = customers.`Customer ID`
+LEFT JOIN products ON orders.`Product ID` = products.`Product ID`
+GROUP BY products.`Roast Type`
 ORDER BY Revenue DESC;
 
 -- Profit and revenue of each type of coffee and size --
